@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+
+<project>
+  <pomVersion>3</pomVersion>
+  <groupId>talient</groupId>
+  <currentVersion>1.1</currentVersion>
+  <organization>
+    <name>Talient, Inc.</name>
+    <url>http://www.talient.com/</url>
+    <logo>http://talient.com/NavBar/NavBar_r1_c1.gif</logo>
+  </organization>
+  <inceptionYear>2000</inceptionYear>
+
+  <url>http://www.talient.com</url>
+
+  <siteAddress>www.talient.com</siteAddress>
+
+  <mailingLists/>
+
+  <developers>
+    <developer>
+      <name>Nick Lonsky</name>
+      <id>nlonsky</id>
+      <email>nlonsky@talient.com</email>
+      <organization>Talient, Inc.</organization>
+      <roles>
+        <role>Author</role>
+      </roles>
+      <url>http://www.talient.com</url>
+      <timezone>-7</timezone>
+    </developer>
+    <developer>
+      <name>Kurt Hall</name>
+      <id>khall</id>
+      <email>khall@talient.com</email>
+      <organization>Talient, Inc.</organization>
+      <roles>
+        <role>Author</role>
+      </roles>
+      <url>http://www.talient.com</url>
+      <timezone>-7</timezone>
+    </developer>
+    <developer>
+      <name>Steve Schmadeke</name>
+      <id>husker</id>
+      <email>husker@talient.com</email>
+      <organization>Talient, Inc.</organization>
+      <roles>
+        <role>Author</role>
+      </roles>
+      <url>http://www.talient.com</url>
+      <timezone>-7</timezone>
+    </developer>
+  </developers>
+
+  <build>
+    <nagEmailAddress>contact@talient.com</nagEmailAddress>
+  </build>
+
+</project>
