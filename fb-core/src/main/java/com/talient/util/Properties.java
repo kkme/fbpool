@@ -7,6 +7,11 @@ import java.io.PrintStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
+
 /**
  * This class provides standard access to properties files for the
  * com.talient.* packages.  The utility methods in this class will
@@ -46,49 +51,36 @@ public final class Properties {
 
     private static java.util.Properties properties = null;
     private static String filename = null;
+    private static InitialContext initCtx = null;
+    private static Context defCtx = null;
 
     public static String getProperty(String key) {
-        if (key.equals("football.database.url")) {
-            return "jdbc:mysql://localhost/nfl?user=nflpool&password=pool";
+        String value = getEnvEntry(key);
+        if (value == null) {
+            final String systemProperty =
+                System.getProperties().getProperty(key);
+            if (systemProperty != null) {
+                return systemProperty;
+            } else {
+                return getProperties().getProperty(key);
+            }
         }
-        if (key.equals("football.pool.name")) {
-            return "NFL Pool";
-        }
-        if (key.equals("football.pool.email")) {
-            return "nflpool@talient.com";
-        }
-        if (key.equals("football.pool.url")) {
-            return "nflpool.cfpool.com";
-        }
-        if (key.equals("football.pool.DocumentRoot")) {
-            return "/home/nflpool/pub_html2/ROOT";
-        }
-        if (key.equals("football.pool.smtp")) {
-            return "localhost";
-        }
-        if (key.equals("football.pool.bcc")) {
-            return "nflpool@talient.com";
-        }
-        if (key.equals("football.pool.overridepw")) {
-            return "nfloverride";
-        }
-        final String systemProperty =
-            System.getProperties().getProperty(key);
-        if (systemProperty != null) {
-            return systemProperty;
-        } else {
-            return getProperties().getProperty(key);
-        }
+        return value;
     }
 
     public static String getProperty(String key, String defaultValue) {
-        final String systemProperty =
-            System.getProperties().getProperty(key);
-        if (systemProperty != null) {
-            return systemProperty;
-        } else {
-            return getProperties().getProperty(key, defaultValue);
+        String value = getEnvEntry(key);
+        if (value == null) {
+            final String systemProperty =
+                System.getProperties().getProperty(key);
+            if (systemProperty != null) {
+                return systemProperty;
+            } else {
+                return getProperties().getProperty(key, defaultValue);
+            }
         }
+        return value;
+
     }
 
     public static void setFilename(String fn) {
@@ -131,6 +123,22 @@ public final class Properties {
             }
         }
         return properties;
+    }
+
+    private static String getEnvEntry(String key) {
+        try {
+            if (defCtx == null) {
+                initCtx = new InitialContext();
+                defCtx = (Context)initCtx.lookup("java:comp/env");
+            }
+            return (String)defCtx.lookup(key);
+        }
+        catch (NamingException ne) {
+            return null;
+        }
+        catch (Exception e) {
+            return null;
+        }
     }
 
     public static void main(String argv[]) {

@@ -8,4 +8,52 @@
     <listener>
         <listener-class>com.talient.football.servlets.PropertiesContextListener</listener-class>
     </listener>
+    <env-entry>
+        <description>Football DB URL</description>
+        <env-entry-name>football.database.url</env-entry-name>
+        <env-entry-value>jdbc:mysql://localhost/nfl?user=nflpool&amp;password=pool</env-entry-value>
+        <env-entry-type>java.lang.String</env-entry-type>
+    </env-entry>
+    <env-entry>
+        <description>Football Pool Name</description>
+        <env-entry-name>football.pool.name</env-entry-name>
+        <env-entry-value>NFL Pool</env-entry-value>
+        <env-entry-type>java.lang.String</env-entry-type>
+    </env-entry>
+    <env-entry>
+        <description>Football Pool Email</description>
+        <env-entry-name>football.pool.email</env-entry-name>
+        <env-entry-value>nflpool@talient.com</env-entry-value>
+        <env-entry-type>java.lang.String</env-entry-type>
+    </env-entry>
+    <env-entry>
+        <description>Football Pool URL</description>
+        <env-entry-name>football.pool.url</env-entry-name>
+        <env-entry-value>nflpool.cfpool.com</env-entry-value>
+        <env-entry-type>java.lang.String</env-entry-type>
+    </env-entry>
+    <env-entry>
+        <description>Football Pool DocumentRoot</description>
+        <env-entry-name>football.pool.DocumentRoot</env-entry-name>
+        <env-entry-value>/home/nflpool/pub_html/ROOT</env-entry-value>
+        <env-entry-type>java.lang.String</env-entry-type>
+    </env-entry>
+    <env-entry>
+        <description>Football Pool smtp</description>
+        <env-entry-name>football.pool.smtp</env-entry-name>
+        <env-entry-value>localhost</env-entry-value>
+        <env-entry-type>java.lang.String</env-entry-type>
+    </env-entry>
+    <env-entry>
+        <description>Football Pool bcc</description>
+        <env-entry-name>football.pool.bcc</env-entry-name>
+        <env-entry-value>nflpool@talient.com</env-entry-value>
+        <env-entry-type>java.lang.String</env-entry-type>
+    </env-entry>
+    <env-entry>
+        <description>Football Pool Override PW</description>
+        <env-entry-name>football.pool.overridepw</env-entry-name>
+        <env-entry-value>nfloverride</env-entry-value>
+        <env-entry-type>java.lang.String</env-entry-type>
+    </env-entry>
 </web-app>
