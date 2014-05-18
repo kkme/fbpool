@@ -5,9 +5,6 @@
     "http://java.sun.com/dtd/web-app_2_3.dtd">
 
 <web-app>
-    <listener>
-        <listener-class>com.talient.football.servlets.PropertiesContextListener</listener-class>
-    </listener>
     <env-entry>
         <description>Football DB URL</description>
         <env-entry-name>football.database.url</env-entry-name>
@@ -35,7 +32,7 @@
     <env-entry>
         <description>Football Pool DocumentRoot</description>
         <env-entry-name>football.pool.DocumentRoot</env-entry-name>
-        <env-entry-value>/home/jboss/jboss-eap-6.2/standalone/deployments/nflpool.war</env-entry-value>
+        <env-entry-value>/home/nflpool/pub_html/ROOT</env-entry-value>
         <env-entry-type>java.lang.String</env-entry-type>
     </env-entry>
     <env-entry>
