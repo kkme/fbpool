@@ -40,13 +40,13 @@
     </env-entry>
     <env-entry>
         <description>Football Pool smtp</description>
-        <env-entry-name>football.pool.smtp</env-entry-name>
+        <env-entry-name>football.pool.email.smtp</env-entry-name>
         <env-entry-value>localhost</env-entry-value>
         <env-entry-type>java.lang.String</env-entry-type>
     </env-entry>
     <env-entry>
         <description>Football Pool bcc</description>
-        <env-entry-name>football.pool.bcc</env-entry-name>
+        <env-entry-name>football.pool.email.bcc</env-entry-name>
         <env-entry-value>nflpool@talient.com</env-entry-value>
         <env-entry-type>java.lang.String</env-entry-type>
     </env-entry>
