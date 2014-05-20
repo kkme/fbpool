@@ -123,6 +123,19 @@ public class SendMail {
         return true;
     }
 
+    public boolean send(String email) {
+        try {
+            message.setRecipient(Message.RecipientType.TO,
+                    new InternetAddress(email));
+            Transport.send(message);
+        }
+        catch (Exception e) {
+            System.err.println(e.getMessage());
+            return false;
+        }
+        return true;
+    }
+
     public boolean CommnadSend(Entrant entrant) {
         try {
             String preMsg = "To: " + entrant.getContactEmail() +
