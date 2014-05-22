@@ -1,0 +1,13 @@
+#!/bin/sh
+
+cp ~/fbpool/fb-web/target/fb-web.war ~jboss/jboss-eap-6.2/standalone/deployments
+rm ~jboss/jboss-eap-6.2/standalone/deployments/fb-web.war.deployed
+touch ~jboss/jboss-eap-6.2/standalone/deployments/fb-web.war.dodeploy
+
+if [ ! -d ~jboss/jboss-eap-6.2/standalone/deployments/nflpool.war ]; then
+    mkdir ~jboss/jboss-eap-6.2/standalone/deployments/nflpool.war
+fi
+cd ~jboss/jboss-eap-6.2/standalone/deployments/nflpool.war
+jar xvf ~/fbpool/nflpool/target/nflpool.war
+touch ~jboss/jboss-eap-6.2/standalone/deployments/nflpool.war.dodeploy
+cd -
