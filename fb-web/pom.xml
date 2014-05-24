@@ -8,7 +8,7 @@
   </parent>
   <artifactId>fb-web</artifactId>
   <packaging>war</packaging>
-  <name>fb-web  War Module</name>
+  <name>fb-web War Base Module</name>
   <url>http://maven.apache.org</url>
   <dependencies>
     <dependency>

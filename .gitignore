@@ -2,3 +2,6 @@
 fb-core/target
 fb-web/target
 nflpool/target
+nflpool-jsp/target
+cfpool/target
+cfpool-jsp/target

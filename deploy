@@ -1,13 +1,39 @@
 #!/bin/sh
 
-cp ~/fbpool/fb-web/target/fb-web.war ~jboss/jboss-eap-6.2/standalone/deployments
-rm ~jboss/jboss-eap-6.2/standalone/deployments/fb-web.war.deployed
-touch ~jboss/jboss-eap-6.2/standalone/deployments/fb-web.war.dodeploy
+# FB_HOME=~/fbpool
+FB_HOME=~/ws/fbpool
 
-if [ ! -d ~jboss/jboss-eap-6.2/standalone/deployments/nflpool.war ]; then
-    mkdir ~jboss/jboss-eap-6.2/standalone/deployments/nflpool.war
+if [ ! -d $JBOSS_HOME ]; then
+    echo "Deployment Failed:"
+    echo -n $JBOSS_HOME
+    echo " does not exist"
+    exit;
 fi
-cd ~jboss/jboss-eap-6.2/standalone/deployments/nflpool.war
-jar xvf ~/fbpool/nflpool/target/nflpool.war
-touch ~jboss/jboss-eap-6.2/standalone/deployments/nflpool.war.dodeploy
+
+# nflpool-jsp war
+cp $FB_HOME/nflpool-jsp/target/nflpool-jsp.war $JBOSS_HOME/standalone/deployments
+rm $JBOSS_HOME/standalone/deployments/nflpool-jsp.war.deployed
+touch $JBOSS_HOME/standalone/deployments/nflpool-jsp.war.dodeploy
+
+# nflpool static war
+if [ ! -d $JBOSS_HOME/standalone/deployments/nflpool.war ]; then
+    mkdir $JBOSS_HOME/standalone/deployments/nflpool.war
+fi
+cd $JBOSS_HOME/standalone/deployments/nflpool.war
+jar xvf $FB_HOME/nflpool/target/nflpool.war
+touch $JBOSS_HOME/standalone/deployments/nflpool.war.dodeploy
+
+# cfpool-jsp war
+cp $FB_HOME/cfpool-jsp/target/cfpool-jsp.war $JBOSS_HOME/standalone/deployments
+rm $JBOSS_HOME/standalone/deployments/cfpool-jsp.war.deployed
+touch $JBOSS_HOME/standalone/deployments/cfpool-jsp.war.dodeploy
+
+# cfpool static war
+if [ ! -d $JBOSS_HOME/standalone/deployments/cfpool.war ]; then
+    mkdir $JBOSS_HOME/standalone/deployments/cfpool.war
+fi
+cd $JBOSS_HOME/standalone/deployments/cfpool.war
+jar xvf $FB_HOME/cfpool/target/cfpool.war
+touch $JBOSS_HOME/standalone/deployments/cfpool.war.dodeploy
+
 cd -

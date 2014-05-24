@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE web-app
+    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+    "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app>
+    <listener>
+        <listener-class>com.talient.football.servlets.PropertiesContextListener</listener-class>
+    </listener>
+    <env-entry>
+        <description>Football DB URL</description>
+        <env-entry-name>football.database.url</env-entry-name>
+        <env-entry-value>jdbc:mysql://localhost/cfpool?user=cfpool&amp;password=pool</env-entry-value>
+        <env-entry-type>java.lang.String</env-entry-type>
+    </env-entry>
+    <env-entry>
+        <description>Football Pool Name</description>
+        <env-entry-name>football.pool.name</env-entry-name>
+        <env-entry-value>CFPOOL</env-entry-value>
+        <env-entry-type>java.lang.String</env-entry-type>
+    </env-entry>
+    <env-entry>
+        <description>Football Pool Email</description>
+        <env-entry-name>football.pool.email</env-entry-name>
+        <env-entry-value>cfpool@cfpool.com</env-entry-value>
+        <env-entry-type>java.lang.String</env-entry-type>
+    </env-entry>
+    <env-entry>
+        <description>Football Pool URL</description>
+        <env-entry-name>football.pool.url</env-entry-name>
+        <env-entry-value>www.cfpool.com</env-entry-value>
+        <env-entry-type>java.lang.String</env-entry-type>
+    </env-entry>
+    <env-entry>
+        <description>Football Pool DocumentRoot</description>
+        <env-entry-name>football.pool.DocumentRoot</env-entry-name>
+        <env-entry-value>/home/jboss/jboss-eap-6.2/standalone/deployments/cfpool.war</env-entry-value>
+        <env-entry-type>java.lang.String</env-entry-type>
+    </env-entry>
+    <env-entry>
+        <description>Football Pool smtp</description>
+        <env-entry-name>football.pool.email.smtp</env-entry-name>
+        <env-entry-value>localhost</env-entry-value>
+        <env-entry-type>java.lang.String</env-entry-type>
+    </env-entry>
+    <env-entry>
+        <description>Football Pool bcc</description>
+        <env-entry-name>football.pool.email.bcc</env-entry-name>
+        <env-entry-value>cfpool@cfpool.com</env-entry-value>
+        <env-entry-type>java.lang.String</env-entry-type>
+    </env-entry>
+    <env-entry>
+        <description>Football Pool Override PW</description>
+        <env-entry-name>football.pool.overridepw</env-entry-name>
+        <env-entry-value>cfoverride</env-entry-value>
+        <env-entry-type>java.lang.String</env-entry-type>
+    </env-entry>
+    <env-entry>
+        <description>Football Pool Contact Us</description>
+        <env-entry-name>football.pool.contactUs</env-entry-name>
+        <env-entry-value>http://www.cfpool.com/contactUs.htm</env-entry-value>
+        <env-entry-type>java.lang.String</env-entry-type>
+    </env-entry>
+</web-app>
