@@ -1,0 +1,17 @@
+#!/bin/sh
+#
+# Usage: load_systems_cron
+#
+
+if [ ! -d /tmp/nflpool_systems ]
+then
+	mkdir /tmp/nflpool_systems;
+fi
+vegas.pl > /tmp/nflpool_systems/\~Vegas.txt
+#harmon.pl > /tmp/nflpool_systems/\~Harmon_Forcast.txt
+
+cd /tmp/nflpool_systems
+load_entries $1 $2 /tmp/nflpool_systems > /tmp/nflpool_systems.$$
+cd
+cat /tmp/nflpool_systems.$$
+rm /tmp/nflpool_systems.$$

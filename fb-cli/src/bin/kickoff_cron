@@ -1,0 +1,12 @@
+#!/bin/sh
+#
+# usage: kick_off year week
+#
+
+# /home/nflpool/bin/vegas.pl >> /home/nflpool/vegas.txt
+/home/nflpool/bin/harmon.pl >> /home/nflpool/harmon.txt
+
+publish_crosstable $1 $2
+publish_recap $1 $2
+sleep 180
+publish_season $1

@@ -10,6 +10,13 @@ if [ ! -d $JBOSS_HOME ]; then
     exit;
 fi
 
+if [ ! -d $FB_HOME ]; then
+    echo "Deployment Failed:"
+    echo -n $FB_HOME
+    echo " does not exist"
+    exit;
+fi
+
 # nflpool-jsp war
 cp $FB_HOME/nflpool-jsp/target/nflpool-jsp.war $JBOSS_HOME/standalone/deployments
 rm $JBOSS_HOME/standalone/deployments/nflpool-jsp.war.deployed

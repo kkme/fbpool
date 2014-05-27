@@ -1,0 +1,32 @@
+#! /bin/sh
+#
+# CVS ID: $Id: $
+#
+# Report the scores for the week.  If two games remain unplayed,
+# report the four possibilities based on the four possible
+# combinations of winning teams excluding ties.  If only one game
+# reains unplayed, report the threee possibile results based
+# on the three possible outcomes of the game including a tie.
+# If all games are played, just report the results.  If more than
+# two games remain unplayed, report the partial scores and indicate
+# the number of games remaining to be played.
+
+if [ -z "$POOL_HOME" ] ; then
+    echo Must set POOL_HOME environment variable
+    exit 1
+fi
+
+# Load pool configuration.
+if [ -f "${POOL_HOME}/etc/pool.conf" ] ; then
+  . ${POOL_HOME}/etc/pool.conf
+else
+    echo Cannot find ${POOL_HOME}/etc/pool.conf
+    exit 2
+fi
+
+if [ $# -ne 2 ]; then
+    echo "Usage: $0 <year> <week>"
+    exit
+fi
+
+java -classpath $POOLCLASSPATH $pflag com.talient.football.util.text.WeekScores "$1" "$2"

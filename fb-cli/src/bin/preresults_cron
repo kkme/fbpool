@@ -1,0 +1,8 @@
+#!/bin/sh
+#
+# Usage: preresults_cron <year> <week> weeklyRecap <cfpool|nflpool>
+#
+week_scores $1 $2 > /tmp/week_scores.$$
+echo week_scores.$$
+pool_mail $4 $3 /tmp/week_scores.$$
+cat /tmp/week_scores.$$

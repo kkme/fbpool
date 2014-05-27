@@ -1,0 +1,152 @@
+#! /bin/sh
+#
+# CVS ID: $Id: $
+#
+# This script will mail the given file to all of the entrants
+# in the database that match the given criteria.  You can choose
+# to mail to all active entrants, all entrants who have entered
+# for a given week or all entrants who have not entered in a
+# given week.
+#
+# You must specify which pool, cfpool or nflpool, you are
+# mailing to.  Note, however, this does not relieve you from
+# having to set your properties file correctly to indicate
+# which database to use when finding entrants.  This script
+# will cheerfully mail files from the nflpool user to CFPOOL
+# entrants and vice versa.
+#
+# The given file must include "From:" and "Subject:" headers.
+# The script provides the "To:" header.
+
+usage() {
+	echo "Usage: $0 <cfpool|nflpool> active         <filename>"
+	echo "Usage: $0 <cfpool|nflpool> weeklyEntry    <filename>"
+	echo "Usage: $0 <cfpool|nflpool> weeklyStats    <filename>"
+	echo "Usage: $0 <cfpool|nflpool> weeklyRecap    <filename>"
+	echo "Usage: $0 <cfpool|nflpool> weeklyResult   <filename>"
+	echo "Usage: $0 <cfpool|nflpool> standings      <filename>"
+	echo "Usage: $0 <cfpool|nflpool> missing        <filename> <year> <week>"
+	echo "Usage: $0 <cfpool|nflpool> current        <filename> <year> <week>"
+	echo "Usage: $0 <cfpool|nflpool> notifyEarly    <filename> <year> <week>"
+	echo "Usage: $0 <cfpool|nflpool> notifyMedium   <filename> <year> <week>"
+	echo "Usage: $0 <cfpool|nflpool> notifyLate     <filename> <year> <week>"
+}
+
+if [ -z "$POOL_HOME" ] ; then
+    echo Must set POOL_HOME environment variable
+    exit 1
+fi
+
+# Load pool configuration.
+if [ -f "${POOL_HOME}/etc/pool.conf" ] ; then
+  . ${POOL_HOME}/etc/pool.conf
+else
+    echo Cannot find ${POOL_HOME}/etc/pool.conf
+    exit 2
+fi
+
+if [ "$1" = "cfpool" ]; then
+    sendmail_args="-f cfpool"
+elif [ "$1" = "nflpool" ]; then
+    sendmail_args="-f nflpool"
+else
+	usage
+	exit 1
+fi
+
+if [ "$2" = "active" ]; then
+	if [ $# -ne 3 ]; then
+    	usage
+    	exit 1
+	else
+		address_args=
+	fi
+elif [ "$2" = "missing" ]; then
+	if [ $# -ne 5 ]; then
+    	usage
+    	exit 1
+	else
+		address_args="missing $4 $5"
+	fi
+elif [ "$2" = "notifyEarly" ]; then
+	if [ $# -ne 5 ]; then
+    	usage
+    	exit 1
+	else
+		address_args="notifyEarly $4 $5"
+	fi
+elif [ "$2" = "notifyMedium" ]; then
+	if [ $# -ne 5 ]; then
+    	usage
+    	exit 1
+	else
+		address_args="notifyMedium $4 $5"
+	fi
+elif [ "$2" = "notifyLate" ]; then
+	if [ $# -ne 5 ]; then
+    	usage
+    	exit 1
+	else
+		address_args="notifyLate $4 $5"
+	fi
+elif [ "$2" = "weeklyEntry" ]; then
+	if [ $# -ne 3 ]; then
+    	usage
+    	exit 1
+	else
+		address_args="weeklyEntry"
+	fi
+elif [ "$2" = "weeklyStats" ]; then
+	if [ $# -ne 3 ]; then
+    	usage
+    	exit 1
+	else
+		address_args="weeklyStats"
+	fi
+elif [ "$2" = "weeklyRecap" ]; then
+	if [ $# -ne 3 ]; then
+    	usage
+    	exit 1
+	else
+		address_args="weeklyRecap"
+	fi
+elif [ "$2" = "weeklyResult" ]; then
+	if [ $# -ne 3 ]; then
+    	usage
+    	exit 1
+	else
+		address_args="weeklyResult"
+	fi
+elif [ "$2" = "standings" ]; then
+	if [ $# -ne 3 ]; then
+    	usage
+    	exit 1
+	else
+		address_args="standings"
+	fi
+elif [ "$2" = "current" ]; then
+	if [ $# -ne 5 ]; then
+    	usage
+    	exit 1
+	else
+		address_args="current $4 $5"
+	fi
+else
+   	usage
+   	exit 1
+fi
+
+if [ ! -f $3 ]; then
+    echo $0: File not found - $3
+	exit 1
+fi
+
+grep "^From:" $3 > /dev/null || { echo $0: No \"From:\" line found in $3; exit 1; }
+
+grep "^Subject:" $3 > /dev/null || { echo $0: No \"Subject:\" line found in $3; exit 1; }
+
+for address in `java -classpath $POOLCLASSPATH $pflag com.talient.football.util.email.AddressList $address_args`
+do
+	echo Sending $3 to $address
+    (echo To: $address; cat $3) | /usr/sbin/sendmail -t $sendmail_args;
+done

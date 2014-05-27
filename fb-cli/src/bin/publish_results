@@ -1,0 +1,40 @@
+#! /bin/sh
+#
+# CVS ID: $Id: $
+#
+# Format the text results for the given week without the email
+# headers and publish them in the appropriate location under
+# the DocumentRoot.
+
+if [ -z "$POOL_HOME" ] ; then
+    echo Must set POOL_HOME environment variable
+    exit 1
+fi
+
+# Load pool configuration.
+if [ -f "${POOL_HOME}/etc/pool.conf" ] ; then
+  . ${POOL_HOME}/etc/pool.conf
+else
+    echo Cannot find ${POOL_HOME}/etc/pool.conf
+    exit 2
+fi
+
+usage="Usage: $0 [-r DocumentRoot] <year> <week>"
+dflag=
+
+while getopts r: a
+do
+	case $a in
+	r)	dflag="-Dfootball.pool.DocumentRoot=$OPTARG";;
+	\?)	echo $usage
+		exit 1;;
+	esac
+done
+shift `expr $OPTIND - 1`
+
+if [ $# -ne 2 ]; then
+    echo $usage
+    exit 1
+fi
+
+java -classpath $POOLCLASSPATH $dflag $pflag com.talient.football.util.publish.PublishResults "$1" "$2"

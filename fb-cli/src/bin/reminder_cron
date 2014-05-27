@@ -1,0 +1,11 @@
+#!/bin/sh
+#
+# Usage: reminder_cron <year> <week> <notifyEarly> <cfpool|nflpool>
+# Usage: reminder_cron <year> <week> <notifyMedium> <cfpool|nflpool>
+# Usage: reminder_cron <year> <week> <notifyLate> <cfpool|nflpool>
+#
+
+email_reminder $1 $2 > /tmp/reminder.$$
+pool_mail $4 $3 /tmp/reminder.$$ $1 $2
+cat /tmp/reminder.$$
+rm /tmp/reminder.$$

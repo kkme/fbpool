@@ -1,0 +1,27 @@
+#! /bin/sh
+#
+# CVS ID: $Id: $
+#
+# Create a text entry for the given week, complete with the
+# Subject: and From: lines suitable for use with the
+# pool_mail script.
+
+if [ -z "$POOL_HOME" ] ; then
+    echo Must set POOL_HOME environment variable
+    exit 1
+fi
+
+# Load pool configuration.
+if [ -f "${POOL_HOME}/etc/pool.conf" ] ; then
+  . ${POOL_HOME}/etc/pool.conf
+else
+    echo Cannot find ${POOL_HOME}/etc/pool.conf
+    exit 2
+fi
+
+if [ $# -ne 2 ]; then
+    echo "Usage: $0 <year> <week>"
+    exit
+fi
+
+java -classpath $POOLCLASSPATH $pflag com.talient.football.util.email.EmailEntry "$1" "$2"

@@ -1,0 +1,6 @@
+#!/bin/sh
+#
+# Usage: scoregames_cron
+#
+
+scoreGames > /tmp/scoregames.nfl 2>&1

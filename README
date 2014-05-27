@@ -1,1 +1,13 @@
 Talient Inc. Football Pool source code
+
+mvn clean package (mvn clean install doesn't produce fb-cli tar balls)
+    Creates nflpool-jsp.war file and static nflpool.war files
+    Creates cfpool-jsp.war file and static cfpool.war files
+    Creates fb-cli/target/fb-cli-{version}-nflpool.tar.gz
+    Creates fb-cli/target/fb-cli-{version}-cfpool.tar.gz
+
+fbpool/deploy script will deploy the war files.
+
+fb-cli tar balls contain the pool specific version of .talient.properties
+file in bin/talient.properties.  This file will need to be moved to
+$HOME/.talient.properties during installation.
