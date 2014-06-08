@@ -1,7 +1,6 @@
 #!/bin/sh
 
 FB_HOME=~/fbpool
-# FB_HOME=~/ws/fbpool
 
 if [ ! -d $JBOSS_HOME ]; then
     echo "Deployment Failed:"
